@@ -1,11 +1,14 @@
 package Solution;
 import java.util.Scanner;
+import java.util.logging.Logger;
+
 import Solution.Room;
 import Solution.LuxuryRoom;
 import Solution.SuperDeluxRoom;
 import Solution.DeluxRoom;
 
 public class MainClass {
+	private static final Logger LOGGER = Logger.getLogger( MainClass.class.getName() );
 	
 	public static void main(String [ ] args){
 		Room[] rooms = loadRooms();
@@ -53,6 +56,7 @@ public class MainClass {
 					break;
 				}
 				else {
+					LOGGER.warning("User entered wrong symbol. Please try again!");
 					System.out.println("Please try again!");
 					printFirstScreen();
 					roomType = reader.nextInt();
@@ -61,6 +65,7 @@ public class MainClass {
 			} 
 			
 			if (end == true) {
+				LOGGER.info("Exiting the program");
 				break;
 			}
 				
@@ -77,6 +82,7 @@ public class MainClass {
 				}	
 			}
 			else if (available == false) {
+				LOGGER.warning("No rooms available in selected category.");
 				System.out.println("No rooms available from this category, please try again..."
 						+ "\n------------------------------\n");
 				continue;
@@ -119,6 +125,8 @@ public class MainClass {
 	}
 	
 	public static Room[] loadRooms() {
+		LOGGER.info("The rooms array is initiated");
+		
 		LuxuryRoom first = new LuxuryRoom (41, true);
 		LuxuryRoom second = new LuxuryRoom (32, false);
 		SuperDeluxRoom third = new SuperDeluxRoom(33);
@@ -132,6 +140,8 @@ public class MainClass {
 	}
 	
 	public static void printFirstScreen() {
+		LOGGER.info("The first screen of the application is displayed");
+		
 		System.out.println("Please select room type: "
 				+ "\n1. Super Delux"
 				+ "\n2. Delux"
